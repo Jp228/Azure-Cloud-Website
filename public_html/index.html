@@ -1,17 +1,138 @@
 <html lang="en">
-    <link rel="stylesheet" type="text/css" href="./css.css"/>
+    <link rel="stylesheet" href="css.css ">
+    
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CMD Commands</title>
+   
+      
+    <title>Azure Tutorial:</title>
 </head>
 <body>
-    <h1> Commands Reference Sheet: </h1>
+    <h1>Prerequisites</h1>
+ 
+     Before you start this tutiral, you need to have the following installed: <br>
+     <br> 
+     1.   Docker installed on your devlopment machine <br> 
+     2.   Docker hub account <br> 
+     3.An Azure account<br>
+     4. Git installed on your development machine.<br>
+     5.An IDE or text editor to use for editing files. (I would recommend VSCode)<br>
 
-    <p>
+     <h1>Step 1: Log into Azure: </h1>
+    NOTE: You do not need to have Azure CLI installed on your machine to run a docker images in ACI. Docker takes care of everything. <br>
+    <br>
+    Use the foloowing to login to Azure: <br>
+     $ docker login azure<br> 
+     <br> 
+
+     This will open a browser and prompt you to login to Azure: <br>
+    <br> 
+    <img src="Azure Sighn In.PNG"> <br>
+    <br> 
+     Select the account that you wish to use and login. Once you have logged in, then you can close the window. In your termianl  window you should see login succeeded <br>    " <br> 
+    <br>
+    <img src="login.png">
+
+<h1>Azure ACI Context:</h1>
+One oncept that Docker has is called contexts. In Simpler termes, contexts is a place where you can run dockepr containers. <br>
+<br> 
+To Look at what containers are running on your system, you can use the $ docker context list command. It should look kind of like this: <br>
+
+<img src="Docker Context.PNG"><br>
+
+<br>
+let’s now  create an ACI context that we can run containers with. we can use the following command to create an ACI context: $ docker context create aci --help <br>
+<br>
+
+
+<img src="create doctor context.PNG"> <br> 
+<br> 
+
+you should notice that under the flags section of the help, there is an option to set the location resource-group and subscription id. <br>
+You can pass these flacgs, if you don't then docker will asj you these questions in interactive mode<br> 
+<br>
+
+<h1>Switch Contexts:</h1>
+
+Let’s take a look at our running containers.<br>
+Before we can do that, we should change our active contextto the ACI context. Use the following command to change the active context:$ docker context use myaci<br>
+Nice, since we told Docker to use the myaci context, we see a list of containers running in our Azure account and not on our local machine.<br>
+<br> 
+Let’s make sure our container is running. Copy the IP address of the container from the above ps output and paste it into your browser address bar. You can see our Nginx web server running!<br>
+<br>
+To stop and remove the container, run the following command:$ docker rm web 
+
+<h1>Run Containers ON ACI: </h1>
+Now that we have the ACI context setup we can run the containers in the cloud. <br> 
+There are two ways that we can tell Docker which context you want your commands to be appkied to. <br>
+The first way is to pass the -context flag and the other is to tell Docker which context we want to use with the rest of the commands by switching contexts. <br> 
+<br> 
+The command that we use is :$ docker --context myaci run -d --name web -p 80:80 nginx<br> 
+<br> 
+
+We can see that docker interacred with the ACI to create a container instance called web and then started a single instance. You can navigate to the zure portal and use docker commands that you are familar with. <br> 
+<br>
+
+<h1>Build and Run Locally:</h1>
+Make sure you are in the root directory for the project. We are going to build the images and start the application with Docker Compose.<br>
+<br>
+
+The first step that we need to do is add your Docker ID to the image in our docker-compose.yml file.<br>
+Open the docker-compose.yml file in an editor and replace username with your Docker ID.
+
+Next, we need to make sure we are using the local Docker context. Using the following command to set the docker context to default: $ docker context use default <br>
+<br>
+
+
+Now we can build and start our application using docker-compose. Using the following function to vuild and start our application using docker: $ docker-compose up --build <br>
+<br> 
+
+
+Navigate to http://localhost:5000 and click the Timestamp button a couple of times ti see how the screen updates. <br> 
+
+
+<h1>Switching contexts</h1>
+Let’s take a look at our running containers. But before we do that let’s switch our active context to the ACI context we setup above so we do not have to keep typing –context with every command<br>
+<br>
+We can use the $ docker context use myaci command to change the context. 
+
+<h1>Compose on ACI</h1>
+
+Now let’s run our application on ACI using the new docker compose integration.<br>
+<br> 
+
+We’ll first need to push our image to Docker Hub so ACI can pull the image and run it. <br>
+<br>
+
+
+
+Run the following command to push your image to your Docker Hub account: $ docker-compose push<br>
+<br> 
+
+
+Then lets switch to our ACI context using the followiung command: $docker context use myaci <br>
+<br> 
+
+if you need to see the list of contests that are being used, you use the following command: $ docker context list
+
+Okay, now that we are using the ACI context, let’s start our application in the cloud.You can use the following function to do this: $ docker compose up <br>
+<br> 
+
+Now lets verify that the application that we pushed is up and running. to see the IP adress, we can list the docker containers that are running. <br>
+To do this, we can use the following command: $ docker ps <br> 
+
+<br>
+Copy the IP address and port listed above and paste into your favorite browser and you should see the website displayed in your favorie browser. <br>
+<br> 
+
+<h1> Commands Reference Sheet: </h1>
+
+
         <h2> Terminal Commands: </h2>
 
+        
 
         1. pwd: Present Working Directory: <br>
         prints the current working director<br> 
@@ -76,7 +197,6 @@
         Kills one or more containers. <br>
         <br>
 
-    </p>
-    
+
 </body>
 </html>
