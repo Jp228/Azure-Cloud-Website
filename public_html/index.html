@@ -14,16 +14,16 @@
 
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
-  <link rel="icon" href="/img/azure.png">
+  <link rel="icon" href="img/azure.png">
   <meta name="theme-color" content="#fafafa">
 </head>
 
 <body>
     <h1>Prerequisites</h1>
 
-     Before you start this tutiral, you need to have the following installed: <br>
+     Before you start this tutorial, you need to have the following installed: <br>
      <br>
-     1.   Docker installed on your devlopment machine <br>
+     1.   Docker installed on your development machine <br>
      2.   Docker hub account <br>
      3.An Azure account<br>
      4. Git installed on your development machine.<br>
@@ -32,41 +32,41 @@
      <h1>Step 1: Log into Azure: </h1>
     NOTE: You do not need to have Azure CLI installed on your machine to run a docker images in ACI. Docker takes care of everything. <br>
     <br>
-    Use the foloowing to login to Azure: <br>
+    Use the following to login to Azure: <br>
      $ docker login azure<br>
      <br>
 
      This will open a browser and prompt you to login to Azure: <br>
     <br>
-    <img src="/img/Azure Sighn In.PNG" width="50%" height="50%"> <br>
+    <img src="img/Azure Sighn In.PNG" width="50%" height="50%"> <br>
     <br>
-     Select the account that you wish to use and login. Once you have logged in, then you can close the window. In your termianl  window you should see login succeeded <br>    " <br>
+     Select the account that you wish to use and login. Once you have logged in, then you can close the window. In your terminal  window you should see login succeeded <br>    " <br>
     <br>
-    <img src="/img/login.png" width="50%" height="50%">
+    <img src="img/login.png" width="50%" height="50%">
 
 <h1>Azure ACI Context:</h1>
-One oncept that Docker has is called contexts. In Simpler termes, contexts is a place where you can run dockepr containers. <br>
+One concept that Docker has is called contexts. In Simpler terms, contexts is a place where you can run docker containers. <br>
 <br>
 To Look at what containers are running on your system, you can use the $ docker context list command. It should look kind of like this: <br>
 
-<img src="/img/Docker Context.PNG" width="50%" height="50%"><br>
+<img src="img/Docker Context.PNG" width="50%" height="50%"><br>
 
 <br>
 let’s now  create an ACI context that we can run containers with. we can use the following command to create an ACI context: $ docker context create aci --help <br>
 <br>
 
 
-<img src="/img/create doctor context.PNG" width="50%" height="50%"> <br>
+<img src="img/create doctor context.PNG" width="50%" height="50%"> <br>
 <br>
 
 you should notice that under the flags section of the help, there is an option to set the location resource-group and subscription id. <br>
-You can pass these flacgs, if you don't then docker will asj you these questions in interactive mode<br>
+You can pass these flags, if you don't then docker will asj you these questions in interactive mode<br>
 <br>
 
 <h1>Switch Contexts:</h1>
 
 Let’s take a look at our running containers.<br>
-Before we can do that, we should change our active contextto the ACI context. Use the following command to change the active context:$ docker context use myaci<br>
+Before we can do that, we should change our active context the ACI context. Use the following command to change the active context:$ docker context use myaci<br>
 Nice, since we told Docker to use the myaci context, we see a list of containers running in our Azure account and not on our local machine.<br>
 <br>
 Let’s make sure our container is running. Copy the IP address of the container from the above ps output and paste it into your browser address bar. You can see our Nginx web server running!<br>
@@ -81,7 +81,7 @@ The first way is to pass the -context flag and the other is to tell Docker which
 The command that we use is :$ docker --context myaci run -d --name web -p 80:80 nginx<br>
 <br>
 
-We can see that docker interacred with the ACI to create a container instance called web and then started a single instance. You can navigate to the zure portal and use docker commands that you are familar with. <br>
+We can see that docker interacted with the ACI to create a container instance called web and then started a single instance. You can navigate to the azure portal and use docker commands that you are familiar with. <br>
 <br>
 
 <h1>Build and Run Locally:</h1>
@@ -95,7 +95,7 @@ Next, we need to make sure we are using the local Docker context. Using the foll
 <br>
 
 
-Now we can build and start our application using docker-compose. Using the following function to vuild and start our application using docker: $ docker-compose up --build <br>
+Now we can build and start our application using docker-compose. Using the following function to void and start our application using docker: $ docker-compose up --build <br>
 <br>
 
 
@@ -103,7 +103,7 @@ Navigate to http://localhost:5000 and click the Timestamp button a couple of tim
 
 
 <h1>Switching contexts</h1>
-Let’s take a look at our running containers. But before we do that let’s switch our active context to the ACI context we setup above so we do not have to keep typing –context with every command<br>
+Let’s take a look at our running containers. But before we do that let’s switch our active context to the ACI context we set up above, so we do not have to keep typing –context with every command<br>
 <br>
 We can use the $ docker context use myaci command to change the context.
 
@@ -121,7 +121,7 @@ Run the following command to push your image to your Docker Hub account: $ docke
 <br>
 
 
-Then lets switch to our ACI context using the followiung command: $docker context use myaci <br>
+Then lets switch to our ACI context using the following command: $docker context use myaci <br>
 <br>
 
 if you need to see the list of contests that are being used, you use the following command: $ docker context list
@@ -129,11 +129,11 @@ if you need to see the list of contests that are being used, you use the followi
 Okay, now that we are using the ACI context, let’s start our application in the cloud.You can use the following function to do this: $ docker compose up <br>
 <br>
 
-Now lets verify that the application that we pushed is up and running. to see the IP adress, we can list the docker containers that are running. <br>
+Now lets verify that the application that we pushed is up and running. to see the IP address, we can list the docker containers that are running. <br>
 To do this, we can use the following command: $ docker ps <br>
 
 <br>
-Copy the IP address and port listed above and paste into your favorite browser and you should see the website displayed in your favorie browser. <br>
+Copy the IP address and port listed above and paste into your favorite browser, and you should see the website displayed in your favorite browser. <br>
 <br>
 
 <h1> Commands Reference Sheet: </h1>
@@ -152,7 +152,7 @@ Copy the IP address and port listed above and paste into your favorite browser a
         <br>
 
         3. cd: Change Directory: <br>
-        Changes the current directory to what is spesicied by the user. <br>
+        Changes the current directory to what is specified by the user. <br>
         <br>
 
         4. mkdir: Make New Directory: <br>
@@ -168,7 +168,7 @@ Copy the IP address and port listed above and paste into your favorite browser a
         <br>
 
         7. vi: <br>
-        text editor that can be used to edit files through the terminal/Comand Line. <br>
+        text editor that can be used to edit files through the terminal/Command Line. <br>
         <br>
 
         <h2> Git Commands:</h2>
@@ -176,11 +176,11 @@ Copy the IP address and port listed above and paste into your favorite browser a
         Creates a new git repo <br>
         <br>
         2. git add (filename): <br>
-        adds a change in the working directory to the. If you include a ".", then it will include all the files. <br>
+        adds a change in the working directory. If you include a ".", then it will include all the files. <br>
         <br>
 
         3. git commit -m (message describing commit)<br>
-        commits your changes with a message that discribes the changes that you are commiting <br>
+        commits your changes with a message that describe the changes that you are committing <br>
         <br>
 
         4. git checkout (-b) (branch) (-b makes new branch and switches to it)<br>
